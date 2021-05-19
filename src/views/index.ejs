@@ -1,0 +1,61 @@
+
+<%- include('partials/_header.ejs') %>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5">
+        <div class="card">
+          <div class="card-body">
+            <form action="/add" method="POST">
+              <div class="form-group">
+                <input type="text" name="title" placeholder="titulo aqui" class="form-control">
+              </div>
+              <div class="form-group">
+                <textarea name="description" cols="80" class="form-control" placeholder="inserta tu texto"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                Add
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>N°</th>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Operation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(var i = 0;i<lastareas.length;i++){ %>
+              <tr>
+                <td>
+                  <%= i+1%>
+                </td>
+                <td>
+                  <%= lastareas[i].title%>
+                </td>
+                <td>
+                  <%= lastareas[i].description%>
+                </td>
+                <td>
+                  <a href="/turn/<%= lastareas[i]._id%>"
+                    class="btn <%= lastareas[i].status ? 'btn-success' : 'btn-dark' %>">
+                    hecho
+                  </a>
+                  <a href="/delete/<%= lastareas[i]._id%>" class="btn btn-danger">borrar</a>
+                  <a href="/edit/<%= lastareas[i]._id%>" class="btn btn-info">editar</a>
+                </td>
+              </tr>
+            <%}%>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+<%- include('partials/_footer.ejs') %>
